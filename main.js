@@ -9,17 +9,13 @@ app.get("/", function(req, res) {
       return;
     }
     return `
-    <div class="track">
-        <div>
-            <h3>${file}</h3>
-        </div>
-        <div>
-            <audio controls style="width: 100%" preload="metadata">
+    <li class="track">
+        <p>${file}</p>
+        <audio controls preload="metadata">
                 <source src="/track/${file}" type="audio/mpeg">
                 Your browser does not support the audio element.
-            </audio>
-        </div>
-    </div>`;
+        </audio>
+    </li>`;
   });
   res.send(`
         <html>
@@ -30,7 +26,11 @@ app.get("/", function(req, res) {
             <body style="text-align:center;">
                 <h1 class="title">Music Player</h1>
                 <h2 class="subtitle">Put MP3 files on the tracks directory to see them here</h2>
-                ${tracks.join("")}
+                <div class="container">
+                    <ul>
+                        ${tracks.join("")}
+                    <ul>
+                </div>
                 <script src="/index.js"></script>
             </body>
         </html>
