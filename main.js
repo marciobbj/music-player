@@ -1,14 +1,14 @@
-var express = require('express')
-var app = express()
-var path = require('path')
-var fs = require('fs')
+var express = require("express");
+var app = express();
+var path = require("path");
+var fs = require("fs");
 
-app.get('/', function(req, res) {
-    const tracks = fs.readdirSync(path.join(__dirname, 'tracks')).map(file => {
-        if(file.indexOf('.mp3') === -1) {
-            return
-        }
-        return `
+app.get("/", function(req, res) {
+  const tracks = fs.readdirSync(path.join(__dirname, "tracks")).map(file => {
+    if (file.indexOf(".mp3") === -1) {
+      return;
+    }
+    return `
     <div class="track">
         <div>
             <h3>${file}</h3>
@@ -19,9 +19,9 @@ app.get('/', function(req, res) {
                 Your browser does not support the audio element.
             </audio>
         </div>
-    </div>`
-    })
-    res.send(`
+    </div>`;
+  });
+  res.send(`
         <html>
             <head>
                 <title>Music Player</title>
@@ -30,17 +30,17 @@ app.get('/', function(req, res) {
             <body style="text-align:center;">
                 <h1 class="title">Music Player</h1>
                 <h2 class="subtitle">Put MP3 files on the tracks directory to see them here</h2>
-                ${tracks.join('')}
+                ${tracks.join("")}
                 <script src="/index.js"></script>
             </body>
         </html>
-    `)
-})
+    `);
+});
 
-app.get('/track/:track', function(req, res) {
-    res.sendFile(path.join(__dirname, 'tracks', req.params.track))
-})
+app.get("/track/:track", function(req, res) {
+  res.sendFile(path.join(__dirname, "tracks", req.params.track));
+});
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 
-app.listen(9090)
+app.listen(9090);
