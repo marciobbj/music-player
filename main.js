@@ -31,7 +31,7 @@ app.get('/', function(req, res) {
                 <h1 class="title">Music Player</h1>
                 <h2 class="subtitle">Put MP3 files on the tracks directory to see them here</h2>
                 ${tracks.join('')}
-                <script src="/index.js" />
+                <script src="/index.js"></script>
             </body>
         </html>
     `)
