@@ -9,11 +9,11 @@ services:
     command: /boot.sh
     restart: on-failure
 
-  frontend:
+  front:
     image: node:10-alpine
-    command: npm run start
+    command: yarn run serve
     volumes:
-      - ./frontend:/app
+      - ./front:/app
     working_dir: /app
     restart: on-failure
 
