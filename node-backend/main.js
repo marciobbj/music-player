@@ -9,13 +9,7 @@ app.get("/", function(req, res) {
       return;
     }
     return `
-    <li class="track">
-        <p>${file}</p>
-        <audio controls preload="metadata">
-                <source src="/track/${file}" type="audio/mpeg">
-                Your browser does not support the audio element.
-        </audio>
-    </li>`;
+    `;
   });
   res.send(`
         <html>

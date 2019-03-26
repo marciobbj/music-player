@@ -1,5 +1,6 @@
-from django.urls import path, include
+from django.urls import include
+from django.urls import path
 
 urlpatterns = [
-    path('api/v1/', include('v1_track.urls'))
+    path('api/v1/', include('v1_track.urls')),
 ]

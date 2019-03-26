@@ -14,7 +14,7 @@ class TrackSerializer(serializers.ModelSerializer):
     def validate_file(self, value):
         checks = [(s in value.name) for s in allowed_formats]
         if not any(checks):
-            raise serializers.ValidationError('This field must be supplied with an audio file')
+            raise serializers.ValidationError(
+                'This field must be supplied with an audio file',
+            )
         return value
-
-
