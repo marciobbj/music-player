@@ -3,10 +3,10 @@ FROM node:10-alpine as build-deps
 WORKDIR /app/
 
 COPY front/package.json front/package-lock.json /app/
-RUN yarn install
+RUN npm install
 
 COPY front /app/
-RUN yarn run build
+RUN npm run build
 
 FROM nginx:alpine
 

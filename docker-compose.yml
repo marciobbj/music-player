@@ -11,7 +11,7 @@ services:
 
   front:
     image: node:10-alpine
-    command: yarn run serve
+    command: npm run serve
     volumes:
       - ./front:/app
     working_dir: /app
