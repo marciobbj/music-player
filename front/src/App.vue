@@ -3,8 +3,11 @@
     <h1 class="title">Music Player</h1>
       <h2 class="subtitle">Make your playlist!!!</h2>
       <div class="container">
-          <ul style="padding: 0;">
-              <Tracks></Tracks>
+          <ul style="list-style: none">
+              <Tracks
+                  v-for="track in tracks"
+                  :name="track.name"
+                  :url="track.file" />
           </ul>
       </div>
   </div>
@@ -12,6 +15,7 @@
 
 <script>
 import Tracks from './components/Tracks.vue'
+import axios from 'axios'
 
 export default {
   name: 'app',
@@ -20,10 +24,18 @@ export default {
   },
   data: () => {
     return {
+      tracks: []
     }
   },
+  mounted(){
+    this.getTracks();
+  },
   methods: {
-
+    getTracks () {
+      axios.get('/api/v1/tracks').then(response => {
+        this.tracks = response.data
+      })
+    }
   },
 }
 </script>

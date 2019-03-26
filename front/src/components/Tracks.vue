@@ -1,8 +1,8 @@
 <template>
   <li class="track">
-      <p>file.name</p>
+      <p>{{name}}</p>
       <audio controls preload="metadata">
-        <source src="#" type="audio/mpeg">
+        <source :src="url" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
   </li>
@@ -12,7 +12,8 @@
 export default {
   name: 'Tracks',
   props: {
-    msg: String
+    name: String,
+    url: String
   }
 }
 </script>

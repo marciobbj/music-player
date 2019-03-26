@@ -1,5 +1,8 @@
 node_modules/
 package-lock.json
 .DS_Store
+.idea/
+db.sqlite3
+api/media/
 __pycache__/
 *.pyc
