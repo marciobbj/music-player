@@ -2,15 +2,20 @@
     <div id="app">
         <header>
             <h1>Music Player</h1>
-            <a class="waves-effect waves-light btn-large">Add Song</a>
+            <label for="file" class="waves-effect waves-light btn-large" style="cursor: pointer">
+                Add Track!
+                <input type="file" ref="file_input" id="file" @input="uploadTrack" hidden>
+            </label>
         </header>
         <div class="container">
             <table class="highlight">
+                <tbody>
                 <Tracks
                         v-for="track in tracks"
                         :name="track.name"
                         :url="track.file"
                 />
+                </tbody>
             </table>
         </div>
     </div>
@@ -35,13 +40,24 @@
         },
         methods: {
             getTracks() {
-                axios.get('/api/v1/tracks').then(response => {
-                    if (response.data.length === 0) {
-                        this.tracks = false
-                        return
-                    }
-                    this.tracks = response.data
-                })
+                axios.get('/api/v1/tracks')
+                    .then(response => {
+                        if (response.data.length === 0) {
+                            this.tracks = false;
+                            return
+                        }
+                        this.tracks = response.data
+                    })
+            },
+            uploadTrack() {
+                let file = this.$refs.file_input.files[0];
+                let formData = new FormData();
+                const headers = {'Content-Type': 'application/json'};
+                formData.append('name', file.name)
+                formData.append('file', file)
+                axios.post('/api/v1/tracks/', formData, {headers})
+                    .then(response => this.getTracks())
+                    .catch(error => console.error(error));
             },
         },
     }
@@ -55,9 +71,20 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
     }
-
-    table {
-        overflow: auto;
+    header{
+        margin: 5rem;
+    }
+    .container {
         max-height: 400px;
+        overflow: scroll;
+    }
+    table {
+        overflow-y: scroll;
+        height: 100px;
+    }
+    @media (min-height: 520px){
+        header{
+            margin: 5rem 0rem;
+        }
     }
 </style>

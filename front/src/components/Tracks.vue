@@ -71,7 +71,7 @@
         animation: fade 3s linear;
         background: #2bbbad;
         border-radius: 2px;
-        bottom: 5%;
+        bottom: 3%;
         box-shadow: 5px 10px #eee;
         color: white;
         display: flex;
@@ -79,9 +79,9 @@
         justify-content: center;
         min-height: 40px;
         opacity: 1;
-        padding: 10px;
-        position: absolute;
-        right: 5%;
+        padding: 5px;
+        position: fixed;
+        right: 1%;
         width: 200px;
     }
 
@@ -111,6 +111,7 @@
         }
 
         .notification {
+            position: fixed;
             height: 50px;
             right: 0%;
             top: 5%;
