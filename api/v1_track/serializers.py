@@ -9,7 +9,7 @@ class TrackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = 'name', 'file',
+        fields = 'id', 'name', 'file',
 
     def validate_file(self, value):
         checks = [(s in value.name) for s in allowed_formats]

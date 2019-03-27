@@ -1,12 +1,13 @@
 <template>
     <tr>
         <div v-if="message" class="notification"><b>Now Playing:</b> {{message}}</div>
-        <td>
+        <td @click="rowClickHandler($event.target)">
             <p>{{name}}</p>
             <audio v-on:play="updateTrackList($event)" controls preload="metadata">
                 <source :src="url" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            <button class="btn" v-if="showDelete" @click="$emit('deleteTrack')">Delete</button>
         </td>
     </tr>
 </template>
@@ -16,7 +17,8 @@
         name: 'Tracks',
         props: {
             name: String,
-            url: String
+            url: String,
+            id: Number,
         },
         watch: {
             message: {
@@ -26,7 +28,8 @@
         },
         data: () => {
             return {
-                message: false
+                message: false,
+                showDelete: false,
             }
         },
         methods: {
@@ -43,13 +46,16 @@
             },
 
             changeMessage(a) {
-                this.message = a[a.length - 1] //the last item of the path is the file name
+                this.message = a[a.length - 1]; //the last item of the path is the file name
             },
 
             popNotification() {
                 setTimeout(() => {
-                    this.message = false
+                    this.message = false;
                 }, 3000)
+            },
+            rowClickHandler(row) {
+                this.showDelete = !this.showDelete;
             },
         },
     }
@@ -60,10 +66,23 @@
     td {
         display: flex;
         justify-content: space-between;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    td p {
+        width: 90px;
     }
 
     td audio {
         max-width: 250px;
+        height: 40px;
+        margin: auto 0;
+    }
+
+    .btn {
+        background: red;
+        margin: auto 0;
     }
 
     .notification {
@@ -103,6 +122,7 @@
 
         td p {
             text-align: center;
+            width: 100%;
         }
 
         td audio {
@@ -116,6 +136,10 @@
             right: 0%;
             top: 5%;
             width: 100%;
+        }
+
+        .btn {
+            margin: 10px 0;
         }
     }
 </style>

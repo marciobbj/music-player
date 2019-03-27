@@ -14,6 +14,7 @@
                         v-for="track in tracks"
                         :name="track.name"
                         :url="track.file"
+                        @deleteTrack="deleteTrack(track.id)"
                 />
                 </tbody>
             </table>
@@ -59,6 +60,15 @@
                     .then(response => this.getTracks())
                     .catch(error => console.error(error));
             },
+            deleteTrack(id){
+                const headers = {'Content-Type': 'application/json'}
+                axios.delete(`/api/v1/tracks/${id}/`, {headers})
+                    .then(response => {
+                        this.getTracks()
+                        return
+                    })
+                    .catch(error => console.error(error))
+            }
         },
     }
 </script>

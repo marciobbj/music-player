@@ -1,4 +1,5 @@
 import io
+import json
 from unittest import mock
 
 from django.core.files import File
@@ -50,6 +51,21 @@ class TrackSerializerTest(APITestCase):
         )
         self.assertEqual(response.status_code, 201)
         mock_save.assert_called_once()
+
+    @mock.patch('django.core.files.storage.FileSystemStorage.save')
+    def test_user_delete_a_track_file(self, mock_save):
+        mock_save.return_value = mock.MagicMock(return_value='test_file.mp3')  # NOQA
+        file = Track.objects.create(
+            file=File(io.BytesIO(b'bytes')), name='test_file.mp3',
+        )
+        after_instance_creation = Track.objects.count()
+        response = self.client.delete(
+            f'/api/v1/tracks/{file.id}/',
+        )
+        after_delete_request = Track.objects.count()
+        self.assertEqual(response.status_code, 200)
+        self.assertGreater(after_instance_creation, after_delete_request)  # NOQA
+        self.assertEqual(json.loads(response.data)['detail'], 'deleted')
 
     def test_if_passing_not_audio_file(self):
         file = io.BytesIO(b'this is not a music')
