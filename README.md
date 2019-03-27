@@ -2,6 +2,8 @@
 
 ## Hack it locally
 
+clone o repo e use vá até a pasta `front/` e use o comando `npm install`.
+
 ### Docker:
 Para rodar localmente recomendo o uso de Docker,
 em um virtualenv com python 3.6 instale o **docker-compose** com
@@ -29,8 +31,7 @@ Depois de instalado:
 * `python manage.py migrate`
 * `python manage.py runserver`
 
-Vá até a pasta `front/` e use o comando `npm install`. Use
-o comando `npm run serve` e o aplicativo será iniciado.Adaptações
+Use o comando `npm run serve` e o aplicativo será iniciado.Adaptações
 terão que ser feitas nas chamadas axios do aplicativo, especificando
 o full path. O frontend estará disponível em:
 * http://localhost:8080
