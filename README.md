@@ -37,6 +37,7 @@ o full path. O frontend estará disponível em:
 * http://localhost:8080
 
 ### Informações
+* Os primeiros commits são referentes ao desafio frontend.
 * Os testes unitários estão em `v1_track/tests.py`
 para roda-los use `python manage.py test` na pasta `api/`.
 
